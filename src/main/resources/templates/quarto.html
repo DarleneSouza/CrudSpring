@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div th:replace="cabecalho :: head"></div>
+    <title>Crud Manager - Quatos</title>
+</head>
+<body>
+    <div th:replace="navbar :: header"></div>
+    <div class="container my-2">
+        <h1>Quartos</h1>
+        <div>
+            <a th:href="@{/quartos/form}" class="btn btn-primary btn-sm mb-3 float-right">
+                Adicionar Quarto
+            </a>
+        </div>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Preco da Diaria</th>
+                <th>Status</th>
+                <th>Tipo</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="q : ${quartos}">
+                <td th:text="${q.numero}"></td>
+                <td th:text="${q.formateMoeda()}"></td>
+                <td th:text="${q.status}"></td>
+                <td th:text="${q.tipo}"></td>
+                <td>
+                    <a th:href="@{/quartos/update/{id}(id=${q.id})}" class="btn btn-primary">Alterar</a>
+                    <a th:href="@{/quartos/delete/{id}(id=${q.id})}" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <div th:replace="cabecalho :: head"></div>
+    <title>Crud Manager - reserva</title>
+</head>
+
+<body>
+    <div th:replace="navbar :: header"></div>
+    <div class="container my-2">
+        <h2>Reserva</h2>
+        <form action="#" th:action="@{/reservas/new}" th:object="${reserva}" method="POST">
+            <input th:field="*{id}" type="hidden" id="id" required>
+
+            <input type="text" th:field="*{qtdDias}" placeholder="Quantidade de dias" class="form-control mb-4 col-4" required>
+
+            <select th:field="*{idUsuario}" class="form-control mb-4 col-4"required>
+                <option value="">Selecione uma opção</option>
+                <th:block th:each="u : ${users}">
+                    <option th:value="${u.id}" th:text="${u.name}"></option>
+                </th:block>
+            </select>
+            <select th:field="*{idQuarto}" class="form-control mb-4 col-4" required>
+                <option value="">Selecione uma opção</option>
+                <th:block th:each="q : ${quartos}">
+                    <option th:value="${q.id}" th:text="${q.numero}"></option>
+                </th:block>
+            </select>
+
+            <input type="date" th:field="*{diaEntrada}" placeholder="Dia da Entrada" class="form-control mb-4 col-4" required>
+
+
+            <button type="submit" class="btn btn-info col-2">Salvar</button>
+        </form>
+        <hr>
+        <a th:href="@{/reservas}">Reservas</a>
+    </div>
+</body>
+
+</html>
